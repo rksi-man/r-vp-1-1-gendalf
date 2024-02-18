@@ -1,7 +1,28 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
+import os
 
 app = Flask(__name__)
 
 @app.route("/")
-def hello_world():
-    return render_template("index.html", title="Gendalf123")
+def index():
+    return render_template("index.html")
+
+
+@app.route('/create', methods=['GET', 'POST'])
+def create():
+    if request.method == 'POST':
+        file_name = request.form.get('file_name')
+        file_context = request.form.get('file_context')
+        fw = open(f'./files/{file_name}', 'w')
+        fw.write(file_context)
+        fw.close()
+
+        return render_template('created.html', message=file_name)
+    # return redirect('/') # Перекинуть пользователя, если он сам зашел на /create без данных из формы
+    return 'WHAT?!! Go away!'
+
+
+@app.route('/show')
+def show():
+    files_paths = os.listdir('./files')
+    return render_template('show.html', list_files = files_paths)
