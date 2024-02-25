@@ -25,6 +25,7 @@ def create():
 @app.route('/show')
 def show():
     files_paths = os.listdir('./files')
+    files_paths.remove('deleted_files')
     return render_template('show.html', list_files = files_paths)
 
 
@@ -33,3 +34,14 @@ def file_fn(name):
     path = f'./files/{name}'
     file_context = open(path,'r').read()
     return render_template('file.html', file_name=path, file_context=file_context)
+
+
+@app.route('/delete/<name>')
+def file_delete(name):
+    try:
+        path = f'./files/{name}'
+        # os.remove(path)
+        os.rename(path, f'./files/deleted_files/{name}')
+        return f'Ok, file {name} deleted!'
+    except:
+        return f'{name} not found!'
