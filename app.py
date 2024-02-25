@@ -26,3 +26,10 @@ def create():
 def show():
     files_paths = os.listdir('./files')
     return render_template('show.html', list_files = files_paths)
+
+
+@app.route('/file/<name>')
+def file_fn(name):
+    path = f'./files/{name}'
+    file_context = open(path,'r').read()
+    return render_template('file.html', file_name=path, file_context=file_context)

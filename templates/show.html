@@ -13,14 +13,17 @@
             padding: 20px;
             display: flex;
             flex-wrap: wrap;
-            flex-direction: column;
-            justify-content: space-around;
+            /* flex-direction: column; */
+            flex-direction: row;
+            /* justify-content: space-around; */
+            justify-content: flex-start;
         }
         
         .file-card {
             background-color: #333;
             color: #fff;
-            width: 200px;
+            width: 300px;
+            height: 100px;
             padding: 20px;
             margin: 20px;
             border-radius: 10px;
@@ -31,6 +34,7 @@
             margin-top: 0;
         }
         a {
+
             display: block;
             text-align: center;
             margin-top: 20px;
@@ -48,7 +52,8 @@
 <body>
     {% for file_name in list_files %}
         <div class="file-card">
-            <h1 class="file-title">{{ file_name }}</h1>
+            <!-- <h1 class="file-title">{{ file_name }}</h1> -->
+            <a class="file-title" href="/file/{{ file_name }}">{{ file_name }}</a>
         </div>
     {% endfor %}
     <a href="/">Add another 🤌</a>
