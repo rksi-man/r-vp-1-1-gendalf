@@ -19,7 +19,7 @@ def create():
 
         return render_template('created.html', message=file_name)
     # return redirect('/') # Перекинуть пользователя, если он сам зашел на /create без данных из формы
-    return 'WHAT?!! Go away!'
+    return 'WHAT?!! Go away!111'
 
 
 @app.route('/show')
